@@ -1,0 +1,12 @@
+.first-container h1 {
+    display: none;
+}
+#header > footer {
+    padding: 1em;
+    font-size: 14px;
+    line-height: 1.25em;
+}
+#header > footer > p {
+    margin: 0;
+    padding: 0;
+}
