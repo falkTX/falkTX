@@ -15,11 +15,11 @@ If you are just browsing through and like what you see here, please know I have 
 [https://github.com/DISTRHO/DPF](https://github.com/DISTRHO/DPF)
 
 [DISTRHO Plugin Framework](https://github.com/DISTRHO/DPF), or DPF for short, is a **minimalistic C++ framework for audio plugins**.  
-I started it many years ago after being disappointed with the available options for making such plugins.
+I started it many years ago after being disappointed with the available options for making desktop audio plugins.
 Pretty much all the existing options did not support Linux (most still don't) or did so in a subpar way.
-Those that did, like [JUCE](https://juce.com/), ended up generating 2Mb+ sized binaries for a single simple filter FX.
+Those that did, like [JUCE](https://juce.com/), ended up generating 2Mb+ sized binaries for a very simple filter effect...
 
-The idea behind DPF was (and is) to have something that is stupid simple and works well, intentionally not supporting more esoteric features.
+The idea behind DPF was (and still is) to have something that is stupid simple and works well, intentionally not supporting more esoteric features.
 This applies to graphics as well, for which DPF does not implement its own draw operations but instead uses Cairo, OpenGL or Vulkan through a [pugl](https://github.com/lv2/pugl) backend.
 
 By having OpenGL as a possible graphics drawing API, many existing "mini toolkits" can be easily ported over to work with DPF.  
@@ -30,9 +30,9 @@ Also added others like [oui-blendish](https://github.com/IceDragon200/oui-blendi
 
 Bellow follows a list of plugins using DPF that I either created or ported to it, that I am currently maintaining.
 
-For most of these projects I worked on the build setup, plugin format and OS-related low-level things, and GUI implementation.  
+For most of these projects I worked on the build setup, plugin format and OS-related low-level things, sometimes GUI implementation too.  
 Very rarely I actually deal with the DSP implementation details, as that is not my area of expertise.  
-Everything else is fine though.
+Everything else is fine though. ;)
 
 Please note that I keep DPF-based plugins under the [DISTRHO](https://github.com/DISTRHO) organization, just to help reduce clutter on my main account.  
 A few unfinished plugins are not listed here on this page.
@@ -53,21 +53,7 @@ See [CARDINAL-MODULES.md](https://github.com/DISTRHO/Cardinal/blob/main/docs/CAR
 
 ![Cardinal](https://raw.githubusercontent.com/DISTRHO/Cardinal/main/docs/Screenshot_Basic-Patching.png)
 
-#### [DPF-Plugins](https://github.com/DISTRHO/DPF-Plugins)
-
-A meta-collection of other plugin collections, all made using DPF.  
-This project/repository exists to aid in packaging, as it contains all the small individual plugins I made with or ported over to DPF.
-
-The meta-collection consists of:
-
-- [glBars](https://github.com/DISTRHO/glBars)
-- [Kars](https://github.com/DISTRHO/Kars)
-- [Max-Gen examples](https://github.com/DISTRHO/DPF-Max-Gen) (MaBitcrush, MaFreeverb, MaGigaverb, MaPitchshift)
-- [Mini-Series](https://github.com/DISTRHO/Mini-Series) (3BandEQ, 3BandSplitter, PingPongPan)
-- [ndc-Plugs](https://github.com/DISTRHO/ndc-Plugs) (Amplitude Imposer, Cycle Shifter, Soul Force)
-- [MVerb](https://github.com/DISTRHO/MVerb)
-- [Nekobi](https://github.com/DISTRHO/Nekobi)
-- [ProM](https://github.com/DISTRHO/ProM)
+#### [glBars](https://github.com/DISTRHO/glBars)
 
 ![DPF-Plugins](https://kx.studio/repo/screenshots/dpf-plugins.png)
 
@@ -78,10 +64,22 @@ The idea is to load it as a plugin inside the DAW and then the other "real" plug
 This allows, for example, a VST3 host to load LV2 plugins.
 
 Ildaeil is mostly "glue code" to combine all aspects of [Carla](####Carla) and [DPF](####DPF).  
-[Dear ImGui](https://github.com/ocornut/imgui) is used for handling UI things.
+[Dear ImGui](https://github.com/ocornut/imgui) is used for handling UI things.  
+Most of the complexity in Ildaeil comes from embedding hosted plugin GUIs while still displaying Ildaeil's own OpenGL-based GUI.
 
 ![Ildaeil](https://kx.studio/repo/screenshots/ildaeil.png)
 
+#### [Max-Gen examples](https://github.com/DISTRHO/DPF-Max-Gen) (MaBitcrush, MaFreeverb, MaGigaverb, MaPitchshift)
+
+#### [master_me](https://github.com/trummerschlunk/master_me)
+
+#### [Mini-Series](https://github.com/DISTRHO/Mini-Series) (3BandEQ, 3BandSplitter, PingPongPan)
+
+#### [MVerb](https://github.com/DISTRHO/MVerb)
+
+#### [Nekobi](https://github.com/DISTRHO/Nekobi)
+
+<!--
 #### [OneKnob-Series](https://github.com/DISTRHO/OneKnob-Series)
 
 The OneKnob-Series is planned to be a collection of stupidly simple but well-polished and visually pleasing audio plugins, with as little controls as possible, often just one knob and a few options.
@@ -89,6 +87,7 @@ The OneKnob-Series is planned to be a collection of stupidly simple but well-pol
 It is still in development and research phase, I started it as a way to use/test/develop oui-blendish widgets within DPF.
 
 ![OneKnob-Series](https://github.com/DISTRHO/OneKnob-Series/blob/main/plugins/BrickwallLimiter/Screenshot.png)
+-->
 
 #### [PitchTrackingSeries](https://github.com/DISTRHO/PitchTrackingSeries)
 
@@ -100,32 +99,7 @@ This allows audio from instruments (such as guitars) to play and control synth s
 This was started by [Bram Giesen](https://bramgiesen.com/), using [aubio library](https://github.com/aubio/aubio) for the pitch detection heavy work.  
 I worked on the final tweaks and polishing.
 
-### Other DPF-based Plugins
-
-DPF is used not just by me, but by other developers as well.  
-Bellow follows a list of plugins made with DPF.
-
-[![dragonflyreverb](https://kx.studio/repo/screenshots/dragonfly-reverb.png)](https://michaelwillis.github.io/dragonfly-reverb/)
-
-https://www.zamaudio.com/?p=976
-
-https://github.com/clearly-broken-software/ninjas2
-https://raw.githubusercontent.com/rghvdberg/ninjas2/master/plugins/Ninjas2/Artwork/Ninjas2.png
-
-https://github.com/jpcima/spectacle/
-https://github.com/jpcima/spectacle/blob/master/docs/screen.png
-
-https://github.com/jpcima/stone-phaser
-https://github.com/jpcima/stone-phaser/blob/master/modgui/stone-phaser/modgui/screenshot-stone-phaser.png
-
-https://github.com/wolf-plugins/wolf-shaper
-https://raw.githubusercontent.com/wolf-plugins/wolf-shaper/master/docs/images/screenshot.png
-
-https://github.com/wolf-plugins/wolf-spectrum
-https://raw.githubusercontent.com/wolf-plugins/wolf-spectrum/master/src/Screenshot.png
-
-https://github.com/SpotlightKid/ykchorus
-https://github.com/SpotlightKid/ykchorus/blob/master/screenshot.png
+#### [ProM](https://github.com/DISTRHO/ProM)
 
 ### JUCE porting
 
@@ -153,6 +127,7 @@ Typically I would go with DPF for plugins, but while keeping DPF intentionally s
 
 https://github.com/falkTX/JackAss (using VST2 SDK)
 LV2 and VST2 (using vestige header) https://github.com/falkTX/Carla/tree/main/source/plugin
+
 https://github.com/falkTX/FluidPlug
 
 Lots of plugins from https://github.com/moddevices most of them being LV2.
@@ -188,6 +163,8 @@ Please note that only parts of the JACK API are implemented in this mode, but en
 
 ### Cadence and tools
 
+# TODO describe being abandoned, but the start of other tools that have grown from it
+
 One of the very first projects I started is Cadence, as a way to learn GUI programming and have something useful for managing JACK and Linux audio.
 All code was initially written in Python with Qt as the GUI, with a few tools later converted to C++ for having proper realtime performance.
 
@@ -215,6 +192,10 @@ We can enjoy some text editing, terminal emulator, file explorer, pdf viewer and
 For the usecase I wrote this for the external application was actually a local webserver, so a Qt web browser widget is used.
 
 It is likely that this live USB setup can be adapted for other applications, perhaps not even audio related.
+
+## Backend
+
+mod cloud builder
 
 ## Dev-Ops
 
@@ -251,11 +232,12 @@ https://github.com/falkTX/danoft ??
 ## Open-Source contributions
 
 - calf
-- dragonflyreverb
+- dragonflyreverb many PRs
 - lsp CI setup
 - sassy linux build
+- wolf-shaper high-dpi port
 - zamaudio
-- zynaddsubfx
+- zynaddsubfx plugin support (started in carla, remade in DPF)
 
 PS: list a bunch of pull requests for patches/fixes/etc
 
