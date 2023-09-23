@@ -35,7 +35,10 @@ Very rarely I actually deal with the DSP implementation details, as that is not 
 Everything else is fine though. ;)
 
 Please note that I keep DPF-based plugins under the [DISTRHO](https://github.com/DISTRHO) organization, just to help reduce clutter on my main account.  
-A few unfinished plugins are not listed here on this page.
+Also, unfinished and very minor/simple plugins are not listed here on this page.
+
+#### [AIDA-X](https://github.com/AidaDSP/AIDA-X)
+
 
 #### [Cardinal](https://github.com/DISTRHO/Cardinal)
 
