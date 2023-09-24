@@ -218,16 +218,18 @@ You can find my [set of JUCE7 patches here](https://github.com/DISTRHO/DISTRHO-P
 Besides using DPF and JUCE for plugins, I have also created some from scratch, using the format-specific APIs directly.  
 Typically I would go with DPF for plugins, but while keeping DPF intentionally simple there will be a few things it cannot do (like multi MIDI IO).
 
+https://github.com/falkTX/audio-bridge
+
 https://github.com/falkTX/JackAss (using VST2 SDK)
 LV2 and VST2 (using vestige header) https://github.com/falkTX/Carla/tree/main/source/plugin
 
 https://github.com/falkTX/FluidPlug
 
+https://github.com/falkTX/portal-lv2
+
 Lots of plugins from https://github.com/moddevices most of them being LV2.
 I participated in either creating or reviewing the plugins.
 With MOD being a fixed mostly self-contained target, there is little maintenance for these.
-
-https://github.com/falkTX/drmr ??
 
 ## Desktop applications
 
@@ -327,10 +329,20 @@ https://github.com/falkTX/danoft ??
 - calf
 - dragonflyreverb many PRs
 - lsp CI setup
-- sassy linux build
+- sassy linux build https://github.com/falkTX/sassy
 - wolf-shaper high-dpi port
 - zamaudio
 - zynaddsubfx plugin support (started in carla, remade in DPF)
+
+https://github.com/falkTX/drmr
+
+https://github.com/ninodewit/SHIRO-Plugins
+
+https://github.com/falkTX/jack_interposer
+
+https://github.com/falkTX/invada-studio-plugins-lv2
+
+https://github.com/falkTX/protrekkr
 
 PS: list a bunch of pull requests for patches/fixes/etc
 
@@ -341,4 +353,19 @@ PS: list a bunch of pull requests for patches/fixes/etc
 - jack2 maintenance
 - KXStudio repo packaging
 
+https://github.com/falkTX/nooice
+
 https://github.com/DISTRHO/PawPaw
+
+https://github.com/wineasio/wineasio/
+
+### WIP
+
+one-knob series
+
+https://github.com/falkTX/Chibi
+https://github.com/falkTX/kuriborosu
+
+https://github.com/falkTX/FFmpeg/commits/n4.4-jackoutdev
+
+OBS audio plugin w/ carla
