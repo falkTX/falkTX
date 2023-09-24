@@ -39,6 +39,16 @@ Also, unfinished and very minor/simple plugins are not listed here on this page.
 
 #### [AIDA-X](https://github.com/AidaDSP/AIDA-X)
 
+AIDA-X is an Amp Model Player, allowing it to load models of AI trained music gear, which you can then play through! 🎸
+
+Its main intended use is to provide high fidelity simulations of amplifiers.  
+However, it is also possible to run entire signal chains consisting of any combination of amp, cab, dist, drive, fuzz, boost and eq.
+
+This repository contains the source code for the [DPF-based](https://github.com/DISTRHO/DPF) plugin variant, see [aidadsp-lv2](https://github.com/AidaDSP/aidadsp-lv2) for the LV2 headless version of the same engine optimized to run on embedded systems such as [MOD Dwarf](https://mod.audio/dwarf/), RPi, Portenta-X8, Aida DSP OS and so on.
+
+For ease of use, this plugin also contains a cabinet simulator via impulse response files, which runs after the Amp Model.
+
+![AIDA-X](https://raw.githubusercontent.com/AidaDSP/AIDA-X/main/docs/Screenshot.png)
 
 #### [Cardinal](https://github.com/DISTRHO/Cardinal)
 
@@ -56,9 +66,27 @@ See [CARDINAL-MODULES.md](https://github.com/DISTRHO/Cardinal/blob/main/docs/CAR
 
 ![Cardinal](https://raw.githubusercontent.com/DISTRHO/Cardinal/main/docs/Screenshot_Basic-Patching.png)
 
+#### [Fadeli](https://github.com/DISTRHO/Fadeli)
+
+An experiment with Faust Demo Library content as DPF plugins.
+
+Basically glueing a few different projects together:
+
+1. [DPF](https://github.com/DISTRHO/DPF)
+2. [faust](https://faust.grame.fr/)
+3. [faustpp](https://github.com/jpcima/faustpp)
+4. [faust examples](https://faustdoc.grame.fr/examples/reverb/)
+
+Any faust file placed in the `dsp/` directory is automatically added as part of the build.  
+The template files in `template/` directory are passed through `faustpp` that converts the faust dsp file into a buildable DPF-based audio plugin.  
+Then DPF takes care of the rest, producing CLAP, LADSPA, LV2, VST2 and VST3 plugins in one go.
+
 #### [glBars](https://github.com/DISTRHO/glBars)
 
-![DPF-Plugins](https://kx.studio/repo/screenshots/dpf-plugins.png)
+This is an OpenGL bars visualization plugin (as seen in XMMS and XBMC/Kodi).  
+Adapted from the [jack_glbars](https://github.com/nedko/jack_glbars) project by Nedko Arnaudov.
+
+![glBars](https://raw.githubusercontent.com/DISTRHO/glBars/master/plugins/glBars/Screenshot.png)
 
 #### [Ildaeil](https://github.com/DISTRHO/Ildaeil)
 
@@ -74,13 +102,49 @@ Most of the complexity in Ildaeil comes from embedding hosted plugin GUIs while 
 
 #### [Max-Gen examples](https://github.com/DISTRHO/DPF-Max-Gen) (MaBitcrush, MaFreeverb, MaGigaverb, MaPitchshift)
 
+An experiment with Max generated code and DPF.
+
+Based on https://github.com/Cycling74/gen-plugin-export.
+
 #### [master_me](https://github.com/trummerschlunk/master_me)
+
+Automatic audio mastering plugin for live-streaming, podcasting and internet radio stations.
+
+In 2022 it was funded by the Prototype Fund, an open source software funding initiative by the german ministry of education and research.
+
+![master_me](https://raw.githubusercontent.com/trummerschlunk/master_me/master/img/screenshot-easy.png)
+
+![master_me](https://raw.githubusercontent.com/trummerschlunk/master_me/master/img/screenshot-expert.png)
 
 #### [Mini-Series](https://github.com/DISTRHO/Mini-Series) (3BandEQ, 3BandSplitter, PingPongPan)
 
+A collection of small but useful plugins, based on the good old LOSER-Dev Plugins.
+
+This collection currently includes:
+ - 3 Band EQ
+ - 3 Band Splitter
+ - Ping Pong Pan
+
+![3BandEQ](https://raw.githubusercontent.com/DISTRHO/mini-series/master/plugins/3BandEQ/Screenshot.png)
+
+![PingPongPan](https://raw.githubusercontent.com/DISTRHO/mini-series/master/plugins/PingPongPan/Screenshot.png)
+
 #### [MVerb](https://github.com/DISTRHO/MVerb)
 
+Studio quality, open-source reverb. Its release was intended to provide a practical demonstration of Dattorro’s figure-of-eight reverb structure and provide the open source community with a high quality reverb.
+
+This is a DPF'ied build of [MVerb](https://github.com/martineastwood/mverb/), allowing a proper Linux version with UI.
+
+![MVerb](https://raw.githubusercontent.com/DISTRHO/MVerb/master/plugins/MVerb/Screenshot.png)
+
 #### [Nekobi](https://github.com/DISTRHO/Nekobi)
+
+Simple single-oscillator synth based on the Roland TB-303.
+
+This is a DPF'ied build of [nekobee](https://github.com/gordonjcp/nekobee), allowing LV2, VST2 and VST3 builds of the plugin,
+plus a nicer UI with a simple cat animation. 🐈
+
+![Nekobi](https://raw.githubusercontent.com/DISTRHO/nekobi/master/plugins/Nekobi/Screenshot.png)
 
 <!--
 #### [OneKnob-Series](https://github.com/DISTRHO/OneKnob-Series)
@@ -103,6 +167,32 @@ This was started by [Bram Giesen](https://bramgiesen.com/), using [aubio library
 I worked on the final tweaks and polishing.
 
 #### [ProM](https://github.com/DISTRHO/ProM)
+
+[projectM](http://projectm.sourceforge.net/) is an awesome music visualizer.   
+DISTRHO ProM makes it work as an audio plugin
+
+![ProM](https://raw.githubusercontent.com/DISTRHO/prom/master/plugins/ProM/Screenshot.png)
+
+#### [Zinc](https://github.com/DISTRHO/Zinc)
+
+An utility plugin for getting sound out of plugin hosts into [JACK](https://jackaudio.org/).
+
+There are 2 variants - Soft Zinc and Hard Zinc.  
+Both variants create a JACK client where audio from the host is played through.
+
+These plugins do not have any GUI or configuration whatsoever.
+
+The Soft Zinc plugin will copy audio data from the plugin host until it can be synced and sent into JACK.  
+It is meant to be used on plugin hosts that are not using JACK, as a way to get audio from them into the JACK graph.
+
+There is always some latency with this method.
+
+The Hard Zinc plugin will attempt to directly sync the plugin host audio thread with the plugin-created JACK client.  
+It requires that the plugin host is already using JACK and uses it to drive its audio engine.  
+Any other usage is unsupported and is undefined behaviour (but typically results in xruns non-stop).
+
+The plugin uses the JACK non-callback API and semaphores in order to get everything in sync.  
+Under normal circunstances it shouldn't add any extra latency or DSP load.
 
 ### JUCE porting
 
