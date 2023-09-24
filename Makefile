@@ -11,3 +11,6 @@ sources/content.html: README.md
 
 site/index.html: sources/header.html sources/content.html sources/footer.html
 	cat $^ | sed -e 's|<h2|</div></section><section><div class="container"><h2|' > $@
+
+push: all
+	scp site/index.html site/stylesheet.custom.css falktx.berlin:~/sites/falktx/portfolio/
