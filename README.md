@@ -3,7 +3,7 @@
 This is a list of projects I have worked on, either for a job or for fun and research, sometimes as a challenge too.
 
 If you are interested on hiring me for something similar to what you see here, please get in touch!  
-You can reach me at [falktx@falktx.com](mailto:falktx@falktx.com), expect negotiable rates around 60eur/h.  
+You can reach me at [falktx@falktx.com](mailto:falktx@falktx.com), expect negotiable rates around 60eur/h, half of that if doing it as an open-source project.
 Other details about my work can be found [in my CV](https://falktx.com/files/cv.pdf).
 
 If you are just browsing through and like what you see here, please know I have a [Patreon page](https://patreon.com/falktx) you can subscribe to. :)
@@ -34,57 +34,49 @@ For most of these projects I worked on the build setup, plugin format and OS-rel
 Very rarely I actually deal with the DSP implementation details, as that is not my area of expertise.  
 Everything else is fine though. ;)
 
-Please note that I keep DPF-based plugins under the [DISTRHO](https://github.com/DISTRHO) organization, just to help reduce clutter on my main account.  
-Also, unfinished and very minor/simple plugins are not listed here on this page.
+Please note that I keep my own DPF-based plugins under the [DISTRHO](https://github.com/DISTRHO) organization, just to help reduce clutter on my main GitHub account.  
+Also, unfinished and very minor/simple ports are not listed here on this page.
 
 #### [AIDA-X](https://github.com/AidaDSP/AIDA-X)
 
-AIDA-X is an Amp Model Player, allowing it to load models of AI trained music gear, which you can then play through! 🎸
+AIDA-X is an Amp Model Player based on [RTNeural](https://github.com/jatinchowdhury18/RTNeural). 
+It loads previously-trained AI models meant to simulate guitar amplifiers.
 
-Its main intended use is to provide high fidelity simulations of amplifiers.  
-However, it is also possible to run entire signal chains consisting of any combination of amp, cab, dist, drive, fuzz, boost and eq.
+It started as an [LV2 plugin from AidaDSP](https://github.com/AidaDSP/aidadsp-lv2), I ported it to DPF so that we could have it running as CLAP/VST2/VST3 + Standalone, with the GUI based on their existing designs (all drawing manually recreated in NanoVG).  
+I also added some peak meters and post-amp IR convolution (based on work done for other projects).
 
-This repository contains the source code for the [DPF-based](https://github.com/DISTRHO/DPF) plugin variant, see [aidadsp-lv2](https://github.com/AidaDSP/aidadsp-lv2) for the LV2 headless version of the same engine optimized to run on embedded systems such as [MOD Dwarf](https://mod.audio/dwarf/), RPi, Portenta-X8, Aida DSP OS and so on.
-
-For ease of use, this plugin also contains a cabinet simulator via impulse response files, which runs after the Amp Model.
+An wasm/browser version is available to try online at [aida.kx.studio](https://aida.kx.studio/).
 
 ![AIDA-X](https://raw.githubusercontent.com/AidaDSP/AIDA-X/main/docs/Screenshot.png)
 
 #### [Cardinal](https://github.com/DISTRHO/Cardinal)
 
-Cardinal is a free and open-source virtual modular synthesizer plugin,
-it is based on [VCV Rack](https://vcvrack.com/) but with a focus on being a fully self-contained plugin version.
+Cardinal is a modular synthesizer plugin, based on [VCV Rack](https://vcvrack.com/) but with a focus on being a fully self-contained plugin version.
 
-More specifically, this is a DPF-based plugin wrapper around VCV Rack, using its code directly instead of forking the project,
-with the target of having a proper, self-contained, fully free and open-source plugin version of Rack.
+Created first and foremost as a way to have Rack as a conventional open-source audio plugin, following good practices for an audio plugin (a proper audio plugin should be self-contained as much as possible, as to not interfere with the DAW/Host; loading external modules clearly goes against this idea, which is how Rack operates).  
+Also as a way to have a Rack version with support for more than just the basic 3 desktop operating systems, plus LV2 format. 
 
-Cardinal contains Rack, some 3rd-party modules and a few internal utilities all in a single binary.  
-All "Core" modules from Rack have been replaced by Cardinal equivalents, simplified to better work for an audio plugin.  
-I created a few custom modules and also ported [Carla](####Carla), [Ildaeil](####Ildaeil) and [PitchTrackingSeries](####PitchTrackingSeries) to it.
+I created a few custom modules and also ported [AIDA-X](#aida-x), [Carla](#carla), [glBars](#glbars), [Ildaeil](#ildaeil) and [PitchTrackingSeries](#pitchtrackingseries) to it.
 
-See [CARDINAL-MODULES.md](https://github.com/DISTRHO/Cardinal/blob/main/docs/CARDINAL-MODULES.md) for the full list of internal modules
+An wasm/browser version is available to try online at [cardinal.kx.studio/live](https://cardinal.kx.studio/live).
 
 ![Cardinal](https://raw.githubusercontent.com/DISTRHO/Cardinal/main/docs/Screenshot_Basic-Patching.png)
 
 #### [Fadeli](https://github.com/DISTRHO/Fadeli)
 
-An experiment with Faust Demo Library content as DPF plugins.
+An experiment with Faust Demo Library content as DPF plugins, started as a way to study and test [faust](https://faust.grame.fr/) and [faustpp](https://github.com/jpcima/faustpp) before picking the right approach to handle the [master_me](#master_me) audio plugin.
 
-Basically glueing a few different projects together:
+With some makefile magic any faust file placed in the `dsp/` directory is automagically added as part of the build, which generates CLAP, LADSPA, LV2, VST2 and VST3 automatically.
 
-1. [DPF](https://github.com/DISTRHO/DPF)
-2. [faust](https://faust.grame.fr/)
-3. [faustpp](https://github.com/jpcima/faustpp)
-4. [faust examples](https://faustdoc.grame.fr/examples/reverb/)
-
-Any faust file placed in the `dsp/` directory is automatically added as part of the build.  
-The template files in `template/` directory are passed through `faustpp` that converts the faust dsp file into a buildable DPF-based audio plugin.  
-Then DPF takes care of the rest, producing CLAP, LADSPA, LV2, VST2 and VST3 plugins in one go.
+I come back to this project from time to time whenever some new faust-based project is needed.  
+So Fadeli works nicely as a reference point and testing ground to build upon.
 
 #### [glBars](https://github.com/DISTRHO/glBars)
 
-This is an OpenGL bars visualization plugin (as seen in XMMS and XBMC/Kodi).  
+This is a simple OpenGL bars visualization audio plugin (as seen in XMMS and XBMC/Kodi).  
 Adapted from the [jack_glbars](https://github.com/nedko/jack_glbars) project by Nedko Arnaudov.
+
+I created this project as a way to test raw OpenGL calls for a plugin GUI, something that is not static but reacts to audio.
 
 ![glBars](https://raw.githubusercontent.com/DISTRHO/glBars/master/plugins/glBars/Screenshot.png)
 
@@ -94,7 +86,7 @@ Ildaeil is mini-plugin host working as a plugin, allowing one-to-one plugin form
 The idea is to load it as a plugin inside the DAW and then the other "real" plugin inside Ildaeil.  
 This allows, for example, a VST3 host to load LV2 plugins.
 
-Ildaeil is mostly "glue code" to combine all aspects of [Carla](####Carla) and [DPF](####DPF).  
+Ildaeil is mostly "glue code" to combine all aspects of [Carla](#carla) and [DPF](#dpf).  
 [Dear ImGui](https://github.com/ocornut/imgui) is used for handling UI things.  
 Most of the complexity in Ildaeil comes from embedding hosted plugin GUIs while still displaying Ildaeil's own OpenGL-based GUI.
 
@@ -102,28 +94,37 @@ Most of the complexity in Ildaeil comes from embedding hosted plugin GUIs while 
 
 #### [Max-Gen examples](https://github.com/DISTRHO/DPF-Max-Gen) (MaBitcrush, MaFreeverb, MaGigaverb, MaPitchshift)
 
-An experiment with Max generated code and DPF.
-
+An experiment with MAX gen~ based audio plugins and DPF.  
 Based on https://github.com/Cycling74/gen-plugin-export.
+
+Initially done as a way to have gen~ based LV2 plugins on the [MOD Audio platform](https://mod.audio/), then grew into [max-gen-skeleton](https://github.com/moddevices/max-gen-skeleton) for automated plugin builds.  
+The same base code has been used for the [SHIRO-Plugins](https://github.com/ninodewit/SHIRO-Plugins) collection and a few commercial plugins pushed into the [MOD plugin store](https://pedalboards.mod.audio/plugins?text=urn:maxgen:) (K-Devices and SHIRO)
 
 #### [master_me](https://github.com/trummerschlunk/master_me)
 
-Automatic audio mastering plugin for live-streaming, podcasting and internet radio stations.
-
+An automatic audio mastering plugin for live-streaming, podcasting and internet radio stations.  
 In 2022 it was funded by the Prototype Fund, an open source software funding initiative by the german ministry of education and research.
 
-![master_me](https://raw.githubusercontent.com/trummerschlunk/master_me/master/img/screenshot-easy.png)
+The project was started by [Klaus Scheuermann](https://4ohm.de/) and a few other contributors, and I joined at the final implementation stage for turning their faust setup into a proper audio plugin.  
+My work consisted of setting up the build infrastructure, plugin format handling (via DPF of course) and coding a custom GUI for it. Still help on its maintenance from time to time.
 
-![master_me](https://raw.githubusercontent.com/trummerschlunk/master_me/master/img/screenshot-expert.png)
+![master_me easy view](https://raw.githubusercontent.com/trummerschlunk/master_me/master/img/screenshot-easy.png)
+
+![master_me expert view](https://raw.githubusercontent.com/trummerschlunk/master_me/master/img/screenshot-expert.png)
 
 #### [Mini-Series](https://github.com/DISTRHO/Mini-Series) (3BandEQ, 3BandSplitter, PingPongPan)
 
-A collection of small but useful plugins, based on the good old LOSER-Dev Plugins.
+A collection of small but useful plugins, based on the good old LOSER-Dev Plugins.  
+One of my very first DPF-based plugin projects, simple in nature on purpose, as they were mostly the testing ground for all the basics of an audio plugin framework.  
+Graphics done by [António Saraiva](http://www.facebook.com/melmaquiano).
 
 This collection currently includes:
- - 3 Band EQ
- - 3 Band Splitter
- - Ping Pong Pan
+
+- 3 Band EQ
+- 3 Band Splitter
+- Ping Pong Pan
+
+Might add more plugins to it later on, but for now they have served its purpose.
 
 ![3BandEQ](https://raw.githubusercontent.com/DISTRHO/mini-series/master/plugins/3BandEQ/Screenshot.png)
 
@@ -131,70 +132,51 @@ This collection currently includes:
 
 #### [MVerb](https://github.com/DISTRHO/MVerb)
 
-Studio quality, open-source reverb. Its release was intended to provide a practical demonstration of Dattorro’s figure-of-eight reverb structure and provide the open source community with a high quality reverb.
-
-This is a DPF'ied build of [MVerb](https://github.com/martineastwood/mverb/), allowing a proper Linux version with UI.
+An open-source reverb, [originally created as VST2](https://github.com/martineastwood/mverb/), which I have ported to DPF as a way to get its GUI running on Linux and with an LV2 version too.
+It also serves as a way to test text rendering.
 
 ![MVerb](https://raw.githubusercontent.com/DISTRHO/MVerb/master/plugins/MVerb/Screenshot.png)
 
 #### [Nekobi](https://github.com/DISTRHO/Nekobi)
 
-Simple single-oscillator synth based on the Roland TB-303.
+A simple single-oscillator synth based on the Roland TB-303.
+The [original nekobee](https://github.com/gordonjcp/nekobee) was abandoned and coded in DSSI plugin format which most audio hosts do not support.
 
-This is a DPF'ied build of [nekobee](https://github.com/gordonjcp/nekobee), allowing LV2, VST2 and VST3 builds of the plugin,
-plus a nicer UI with a simple cat animation. 🐈
+I ported it to DPF as a way to get a small synth example.  
+Graphics done by [António Saraiva](http://www.facebook.com/melmaquiano).
 
 ![Nekobi](https://raw.githubusercontent.com/DISTRHO/nekobi/master/plugins/Nekobi/Screenshot.png)
 
-<!--
-#### [OneKnob-Series](https://github.com/DISTRHO/OneKnob-Series)
-
-The OneKnob-Series is planned to be a collection of stupidly simple but well-polished and visually pleasing audio plugins, with as little controls as possible, often just one knob and a few options.
-
-It is still in development and research phase, I started it as a way to use/test/develop oui-blendish widgets within DPF.
-
-![OneKnob-Series](https://github.com/DISTRHO/OneKnob-Series/blob/main/plugins/BrickwallLimiter/Screenshot.png)
--->
-
 #### [PitchTrackingSeries](https://github.com/DISTRHO/PitchTrackingSeries)
 
-Is meant to be a plugin series, but for now there is only 1 variant - CV - for audio input and CV output (in 1V/Oct range).
+Note: This project is meant to be a plugin series, but for now there is only 1 plugin - Audio To CV Pitch - for converting audio input into CV output (in 1V/Oct range).
 
-The Audio To CV Pitch plugin is a tool that turns an audio signal into CV pitch and CV gate signals.  
-This allows audio from instruments (such as guitars) to play and control synth sounds and effects.
+This plugin was started by [Bram Giesen](https://bramgiesen.com/), using [aubio library](https://github.com/aubio/aubio) for the pitch detection heavy work.
 
-This was started by [Bram Giesen](https://bramgiesen.com/), using [aubio library](https://github.com/aubio/aubio) for the pitch detection heavy work.  
 I worked on the final tweaks and polishing.
 
 #### [ProM](https://github.com/DISTRHO/ProM)
 
-[projectM](http://projectm.sourceforge.net/) is an awesome music visualizer.   
-DISTRHO ProM makes it work as an audio plugin
+This is an audio plugin that makes use of the the [projectM awesome music visualizer](https://github.com/projectM-visualizer/projectm/).
+
+I started the project as a way to have more complex OpenGL setups working with DPF, but also because it's cool.
 
 ![ProM](https://raw.githubusercontent.com/DISTRHO/prom/master/plugins/ProM/Screenshot.png)
 
 #### [Zinc](https://github.com/DISTRHO/Zinc)
 
-An utility plugin for getting sound out of plugin hosts into [JACK](https://jackaudio.org/).
-
-There are 2 variants - Soft Zinc and Hard Zinc.  
-Both variants create a JACK client where audio from the host is played through.
-
+Small utility plugins for getting sound out of plugin hosts into [JACK](https://jackaudio.org/).  
 These plugins do not have any GUI or configuration whatsoever.
 
-The Soft Zinc plugin will copy audio data from the plugin host until it can be synced and sent into JACK.  
-It is meant to be used on plugin hosts that are not using JACK, as a way to get audio from them into the JACK graph.
+I created these plugins as a way to more reliably test my work-in-progress [OBS audio plugin support](#obs-audio-plugin-host), as (at the time I started the project) OBS did/does not have a way to monitor the audio output without starting a live stream.
 
-There is always some latency with this method.
-
-The Hard Zinc plugin will attempt to directly sync the plugin host audio thread with the plugin-created JACK client.  
-It requires that the plugin host is already using JACK and uses it to drive its audio engine.  
-Any other usage is unsupported and is undefined behaviour (but typically results in xruns non-stop).
-
-The plugin uses the JACK non-callback API and semaphores in order to get everything in sync.  
-Under normal circunstances it shouldn't add any extra latency or DSP load.
+It includes a "soft" zinc variant, that buffers audio and thus has latency, but works with hosts that dynamically change the amount of samples on each plugin process run.  
+A "hard" zinc variant directly syncs the plugin host audio thread with the plugin-created JACK client, thus having no extra latency.
+It requires that the plugin host is already using JACK and uses it to drive its audio engine.
 
 ### JUCE porting
+
+# TODO finalize text
 
 The [DISTRHO-Ports](https://github.com/DISTRHO/DISTRHO-Ports) contains a few plugins I have (im)ported and been maintaining since a few years.  
 They either did not have a Linux version initially or lacked LV2 plugin support (which for many years was not officially part of JUCE).  
@@ -218,14 +200,34 @@ You can find my [set of JUCE7 patches here](https://github.com/DISTRHO/DISTRHO-P
 Besides using DPF and JUCE for plugins, I have also created some from scratch, using the format-specific APIs directly.  
 Typically I would go with DPF for plugins, but while keeping DPF intentionally simple there will be a few things it cannot do (like multi MIDI IO).
 
-https://github.com/falkTX/audio-bridge
+#### [audio-bridge](https://github.com/falkTX/audio-bridge)
 
-https://github.com/falkTX/JackAss (using VST2 SDK)
-LV2 and VST2 (using vestige header) https://github.com/falkTX/Carla/tree/main/source/plugin
+An LV2 audio plugin to bridge audio from the host (or a JACK client) into an ALSA device and vice-versa.  
+Created as an attempt to get the [MOD Dwarf](https://mod.audio/dwarf/) unit working as USB audio interface, but very likely useful in other scenarios too.
 
-https://github.com/falkTX/FluidPlug
+The project is considered still in progress, as it needs more tweaks to become more reliable and resilient against unexpected audio timings (the Dwarf USB2 driver is far from optimal).
 
-https://github.com/falkTX/portal-lv2
+#### [FluidPlug](https://github.com/falkTX/FluidPlug)
+
+Simple synth-like plugins that make use of soundfonts loaded through [fluidsynth library](https://www.fluidsynth.org/), with each plugin hardcoded to a soundfont.
+
+Created as a way to get some simple sound generators for LV2 plugin hosts that do not yet support LV2 file parameters.
+
+#### [JackAss](https://github.com/falkTX/JackAss)
+
+Very simple VST2 plugin that receives MIDI from the host and outputs it in a JACK-MIDI port.
+A FX variant is also available, exposes a few parameters that generate MIDI CC events when changed.
+
+Created out of personal necessity.
+
+#### [portal-lv2](https://github.com/falkTX/portal-lv2)
+
+A plugin made for modular hosts that support multi-threaded processing, allowing to split a single audio processing chain into 2 and thus forcing parallelization of the audio path.
+The implementation of the plugin is quite simple, just some buffer copying and thread-sync via semaphores.
+
+Created out of curiosity, to see if such setup would even work. Turns out it is quite useful, specially on multi-threaded systems where single-CPU-core performance is very limited. See https://forum.mod.audio/t/introducing-portal/9329 for a user discussion about it.
+
+# TODO remove this part, only mention relevant plugins, like convolution loader
 
 Lots of plugins from https://github.com/moddevices most of them being LV2.
 I participated in either creating or reviewing the plugins.
@@ -234,6 +236,8 @@ With MOD being a fixed mostly self-contained target, there is little maintenance
 ## Desktop applications
 
 ### Carla
+
+# TODO finalize text
 
 An modular, feature-full audio plugin host, so we can load all those audio plugins.  
 Has a split backend vs frontend design, which allows the backend to be used in other projects (as seen above in Cardinal and Ildaeil, but also part of LMMS and Zrythm).
@@ -275,6 +279,8 @@ It is my plan to split things from Cadence even more, making smaller projects wi
 The canvas code likely needs to be its own thing, but it is not the case yet.
 
 ### MOD Live-USB Welcome/Setup
+
+# TODO finalize text
 
 I created a tool to serve as welcome screen for Linux-based Live USBs, meant to run in full screen and setup audio related things.  
 The intention is to show a setup screen at the start, which will then start a systemd service that handles the audio (JACK with internal clients).  
@@ -348,6 +354,8 @@ PS: list a bunch of pull requests for patches/fixes/etc
 
 ## Other work
 
+CI/CD github actions
+
 - Embed Linux buildroot
 - Linux Live CD/USB ISO setups
 - jack2 maintenance
@@ -361,7 +369,15 @@ https://github.com/wineasio/wineasio/
 
 ### WIP
 
-one-knob series
+#### [OneKnob-Series](https://github.com/DISTRHO/OneKnob-Series)
+
+# TODO finalize text
+
+The OneKnob-Series is planned to be a collection of stupidly simple but well-polished and visually pleasing audio plugins, with as little controls as possible, often just one knob and a few options.
+
+It is still in development and research phase, I started it as a way to use/test/develop oui-blendish widgets within DPF.
+
+![OneKnob-Series](https://github.com/DISTRHO/OneKnob-Series/blob/main/plugins/BrickwallLimiter/Screenshot.png)
 
 https://github.com/falkTX/Chibi
 https://github.com/falkTX/kuriborosu

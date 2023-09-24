@@ -1,3 +1,7 @@
+#about::before {
+    background: none;
+    display: none;
+}
 .first-container h1 {
     display: none;
 }
@@ -9,4 +13,7 @@
 #header > footer > p {
     margin: 0;
     padding: 0;
+}
+.image.fit img {
+    max-width: fit-content;
 }
