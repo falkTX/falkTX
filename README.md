@@ -176,15 +176,11 @@ It requires that the plugin host is already using JACK and uses it to drive its 
 
 ### JUCE porting
 
-# TODO finalize text
+My [DISTRHO-Ports](https://github.com/DISTRHO/DISTRHO-Ports) project contains a few plugins I have (im)ported and been maintaining since a few years. They either did not have a Linux version initially or lacked LV2 plugin support (which for many years was not officially part of JUCE).
 
-The [DISTRHO-Ports](https://github.com/DISTRHO/DISTRHO-Ports) contains a few plugins I have (im)ported and been maintaining since a few years.  
-They either did not have a Linux version initially or lacked LV2 plugin support (which for many years was not officially part of JUCE).  
 Most of my work for these have been on the build setup, a few times requiring doing code fixes as well.
 
-I [started an LV2 wrapper back in 2011](https://repo.or.cz/juce-lv2.git), which I maintained to keep up with JUCE related changes.  
-This unofficial wrapper still exists in [DISTRHO/JUCE juce6 branch](https://github.com/DISTRHO/JUCE/tree/juce6), which has been super-seeded by an official JUCE LV2 one in JUCE7.  
-None of my code ended up in the new official wrapper.
+I [started an LV2 wrapper back in 2011](https://repo.or.cz/juce-lv2.git), which I maintained to keep up with JUCE related changes. This unofficial wrapper still exists in [DISTRHO/JUCE juce6 branch](https://github.com/DISTRHO/JUCE/tree/juce6), which has been super-seeded by an official JUCE LV2 one in JUCE7. None of my code ended up in the new official wrapper.
 
 You can find my [set of JUCE7 patches here](https://github.com/DISTRHO/DISTRHO-Ports/tree/master/libs/juce7/patches). These include:
 
@@ -193,7 +189,7 @@ You can find my [set of JUCE7 patches here](https://github.com/DISTRHO/DISTRHO-P
 - Bringing back old VST2 interface file (GPLv3+ licensed) from JUCE5
 - Enabling VST2 by default now that it does not need VST2 SDK anymore
 - Tweaks for improved Linux behaviour
-- Old mingw compatibility
+- Older macOS and mingw/win32 compatibility
 
 ### From scratch
 
@@ -220,6 +216,14 @@ A FX variant is also available, exposes a few parameters that generate MIDI CC e
 
 Created out of personal necessity.
 
+#### [MOD Convolution Loader](https://github.com/moddevices/mod-convolution-loader)
+
+A DPF-based IR convolution plugin created for [MOD Audio](https://mod.audio/), based on my work-in-progress [One-Knob Plugin Series'](https://github.com/DISTRHO/OneKnob-Series/) IR-based reverb project, which in turn uses my [custom fork of HiFi-LoFi's FFTConvolver](https://github.com/falkTX/FFTConvolver) engine.
+
+This MOD-specific plugin started from the need of a proprietary and commercially-compatible IR convolution engine for audio plugins.
+
+A mono cabinet-focused and a stereo reverb-focused loader are available.
+
 #### [portal-lv2](https://github.com/falkTX/portal-lv2)
 
 A plugin made for modular hosts that support multi-threaded processing, allowing to split a single audio processing chain into 2 and thus forcing parallelization of the audio path.
@@ -227,78 +231,87 @@ The implementation of the plugin is quite simple, just some buffer copying and t
 
 Created out of curiosity, to see if such setup would even work. Turns out it is quite useful, specially on multi-threaded systems where single-CPU-core performance is very limited. See https://forum.mod.audio/t/introducing-portal/9329 for a user discussion about it.
 
-# TODO remove this part, only mention relevant plugins, like convolution loader
-
-Lots of plugins from https://github.com/moddevices most of them being LV2.
-I participated in either creating or reviewing the plugins.
-With MOD being a fixed mostly self-contained target, there is little maintenance for these.
-
 ## Desktop applications
 
-### Carla
+#### [Carla](https://github.com/falkTX/Carla)
 
-# TODO finalize text
+An modular, feature-full audio plugin host, so we can load all the audio plugins mentioned above on this page.
+Has a split backend vs frontend design, which allows the backend to be used in other projects (such as Cardinal, Ildaeil, LMMS and Zrythm).
 
-An modular, feature-full audio plugin host, so we can load all those audio plugins.  
-Has a split backend vs frontend design, which allows the backend to be used in other projects (as seen above in Cardinal and Ildaeil, but also part of LMMS and Zrythm).
-
-Backend is written in C++ with frontend using Python + Qt.  
+Backend is written in C and C++, frontend has some C++ but still mostly in Python + Qt.  
 The backend has no required external dependencies, I wrote a lot of custom low-level code (dealing with shared memory, semaphores, IPC, threading, etc) so it could be this way.  
-A few libraries are included in Carla codebase (like RtAudio, RtMidi and serd+sord+sratom+lilv combo) not just for easy building but also to patch their sources.
+A few libraries are included in Carla codebase (like RtAudio, RtMidi and serd+sord+sratom+lilv combo) not just for easy building but also for patching their sources.
 
 Carla integrates directly in JACK with its multi-client engine (1 plugin = 1 client) or all plugins as a single client, or abstracted from JACK with its own internal patchbay graph.  
-Native audio and MIDI is provided through the use of JUCE, RtAudio+RtMidi and SDL.
+Native audio and MIDI is provided through the use of JUCE, RtAudio+RtMidi or SDL.
 
-Carla natively supports LADSPA, DSSI, LV2 and VST2 plugin formats, with JUCE used to have extra plugin support (VST3 and AU).  
-A native VST3 host implementation is in currently in development.  
-Plugin bridging works already, using a custom implementation.
+Carla natively supports LADSPA, DSSI, LV2, VST2, VST3 and CLAP plugin formats.  
+Plugin bridging is possible too, using a custom implementation.
 
-Extra file support includes SF2/3 using fluidsynth, SFZ using an internal SFZero fork, JSFX (contributed by Jean ...)
+Extra file support includes SF2/3 using fluidsynth, SFZ using an internal SFZero fork and JSFX.
 
-Still experimental, under Linux Carla can load JACK standalone applications within itself, by faking a JACK server.  
-This uses a similar setup as plugin bridges do, with LD_PRELOAD "magic" to force applications to see Carla's custom libjack.so instead of the real one.  
-Applications end up talking to Carla but have no knowledge of such.  
-Please note that only parts of the JACK API are implemented in this mode, but enough to get most applications to work.
+Still experimental, under Linux Carla can load JACK standalone applications within itself by faking a JACK server. This uses a similar setup as plugin bridges do, but with some extra LD_PRELOAD "magic" to force applications to see a custom libjack.so from Carla instead of the real one. Applications end up talking to Carla but have no knowledge of such. Only parts of the JACK API are implemented in this mode, but enough to already get most applications to work.
 
-### Cadence and tools
+![Carla](https://kx.studio/repo/screenshots/carla-git.png)
 
-# TODO describe being abandoned, but the start of other tools that have grown from it
+#### [Cadence and tools](https://github.com/falkTX/Cadence)
 
-One of the very first projects I started is Cadence, as a way to learn GUI programming and have something useful for managing JACK and Linux audio.
-All code was initially written in Python with Qt as the GUI, with a few tools later converted to C++ for having proper realtime performance.
+*This project has been abandoned, but still serves as reference and has been the starting point for other tools based on it.*
+
+This is one of the very first projects I started, as a way to learn GUI programming and have something useful for managing JACK and Linux audio. All code was initially written in Python with Qt as the GUI, with a few tools later converted to C++ for having proper realtime performance.
 
 Over time Cadence small parts have moved into other projects:
 
-- patchbay canvas code was integrated in Carla, where it received many updates
-- branched off from Carla canvas, RaySession uses the same code as base but with its own style (external project, not my own)
-- pyjacklib became its own project (external project I am helping maintain)
-- qjackrec thing (external project, not my own)
-- bigmeter and xycontrollers were added as internal plugins in Carla
+- patchbay canvas code was integrated in [Carla](#carla), where it received many updates
+- [Carla](#carla)'s canvas was branched off into [RaySession](https://github.com/Houston4444/RaySession), which uses the same code as base but with its own style (external project, not my own)
+- [pyjacklib](https://github.com/jackaudio/pyjacklib) became its own project (external project I am helping maintain)
+- [qjackcapture](https://github.com/SpotlightKid/qjackcapture) from the jack render tool (another external project)
+- bigmeter and xycontrollers were added as internal plugins in [Carla](#carla)
+- [wineasio](https://github.com/wineasio/wineasio/) settings panel
 
-It is my plan to split things from Cadence even more, making smaller projects with their own independent releases instead of a big toolbox like it kinda is now.  
-The canvas code likely needs to be its own thing, but it is not the case yet.
+The only big remaining part to still be split off is the jack2/jackdbus settings tool and then Cadence can really die as a project.
 
-### MOD Live-USB Welcome/Setup
+![Cadence](https://kx.studio/repo/screenshots/cadence.png)
 
-# TODO finalize text
+#### [MOD Live-USB Welcome/Setup](https://github.com/moddevices/mod-live-usb)
 
-I created a tool to serve as welcome screen for Linux-based Live USBs, meant to run in full screen and setup audio related things.  
-The intention is to show a setup screen at the start, which will then start a systemd service that handles the audio (JACK with internal clients).  
+I created a tool to serve as welcome screen for Linux-based Live USBs, meant to run in full screen and setup audio related things.
+The intention was to show a setup screen at the start, which will then start a systemd service that handles the audio (JACK with internal clients).
 Then external application windows are embed into it, as if they are part of the it.
 
-This tool is written in C++ and Qt, with some KDE things because they are just so handy.  
-Since it is booting from a self-contained system (the live USB), dependencies on KDE frameworks is not an issue.  
-We can enjoy some text editing, terminal emulator, file explorer, pdf viewer and other complex widgets with just a few lines of code.
+This tool is written in C++ and Qt, with some KDE things because they are just so handy. Since it is booting from a self-contained system (the live USB), dependencies on KDE frameworks is not an issue. We can enjoy some text editing, terminal emulator, file explorer, pdf viewer and other complex widgets with just a few lines of code. :)
 
 For the usecase I wrote this for the external application was actually a local webserver, so a Qt web browser widget is used.
 
 It is likely that this live USB setup can be adapted for other applications, perhaps not even audio related.
 
-## Backend
+![MOD Live-USB](https://raw.githubusercontent.com/moddevices/mod-live-usb/main/Screenshot.png)
+
+#### [MOD Panel](https://github.com/moddevices/mod-panel)
+
+A simple control panel to start a few services in a sequential manner (mod-host first, then mod-ui, then browsepy) and show their output logs each in their respective tab.
+
+Written in Python and Qt.
+
+![MOD Panel](https://raw.githubusercontent.com/moddevices/mod-panel/master/screenshot.png)
+
+## Full-stack
 
 mod cloud builder
 
-## Dev-Ops
+mod-ui
+
+## Web development
+
+- mod-ui maintenance and new development
+- kxstudio site, no JS in use
+- falktx and this site
+
+client-side web-assembly: Cardinal, Ildaeil
+
+server-side with webrtc streaming: modbox
+
+https://github.com/falkTX/danoft ??
 
 Except for email and proprietary platforms, pretty much all my all social / online service usage is self-hosted.  
 This includes stuff like data backups, video streaming (as creator/uploader) and website hosting.
@@ -315,20 +328,6 @@ Here are a few things I have hosted:
 - [NextCloud](https://nextcloud.falktx.com/apps/gallery/s/HNidExQiALAAyoe) - Easy to manage and update (enjoy the photos!)
 - [PeerTube](https://peertube.kx.studio/) - Complex and only officially supports nginx, but it works
 - [RocketChat](https://chat.kx.studio/) - Complex and fragile, will likely remove it soon
-
-## Web audio
-
-client-side web-assembly: Cardinal, Ildaeil
-
-server-side with webrtc streaming: modbox
-
-## Web development
-
-- mod-ui maintenance and new development
-- kxstudio site, no JS in use
-- falktx and this site
-
-https://github.com/falkTX/danoft ??
 
 ## Open-Source contributions
 
@@ -355,6 +354,15 @@ PS: list a bunch of pull requests for patches/fixes/etc
 ## Other work
 
 CI/CD github actions
+
+https://github.com/moddevices/mod-lv2-extensions
+https://github.com/KXStudio/LV2-Extensions
+
+https://github.com/moddevices/mod-host
+
+https://github.com/moddevices/mod-ui
+
+https://github.com/moddevices/linux-mainline/commits/linux-6.1.y-patches
 
 - Embed Linux buildroot
 - Linux Live CD/USB ISO setups
