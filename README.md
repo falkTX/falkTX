@@ -317,11 +317,9 @@ The mod-ui project is meant to be used on desktop systems, as part of my work fo
 
 #### Self hosting
 
-Except for email and proprietary platforms, pretty much all my all social / online service usage is self-hosted.  
-This includes stuff like data backups, video streaming (as creator/uploader) and website hosting.
+Except for email and proprietary platforms, pretty much all my all social / online service usage is self-hosted. This includes stuff like data backups, video streaming (as creator/uploader) and website hosting.
 
-I like Debian and Apache for hosting serving web content, and know those fairly well at this point.  
-When setting up self-hosted services I typically go with a systemd service (if the service is simple and self-contained), or rely on docker and/or docker-compose to keep them contained.
+I like Debian and Apache for hosting/serving web content, and know these fairly well at this point. When setting up self-hosted services I typically go with a systemd service (if the service is simple and self-contained), or rely on docker and/or docker-compose to keep them contained.
 
 Here are a few interesting things I am hosting, that are not just static websites:
 
