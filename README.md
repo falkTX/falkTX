@@ -328,7 +328,7 @@ Here are a few interesting things I am hosting, that are not just static website
 - [Jitsi](https://meet.kx.studio/) - For quick and easy calls with friends (specially handy now that the Jitsi main instance requires a user account)
 - [Mastodon](https://mastodon.falktx.com/) - ActivityPub based social media platform, complex setup with many services (come follow me!)
 - [NextCloud](https://nextcloud.falktx.com/apps/gallery/s/HNidExQiALAAyoe) - PHP based, easy to manage and update (enjoy the photos!)
-- [PeerTube](https://peertube.kx.studio/) - Video hosting and streaming, complex setup that officially supports nginx, but I got it to work with Apache anyway :)
+- [PeerTube](https://peertube.kx.studio/) - Video hosting and streaming, complex setup that only officially supports nginx, but I got it to work with Apache anyway :)
 
 ## Open-Source contributions
 
