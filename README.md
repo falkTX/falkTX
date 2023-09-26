@@ -334,73 +334,78 @@ Here are a few interesting things I am hosting, that are not just static website
 
 ## Open-Source contributions
 
-#### [Calf Studio Gear](https://github.com/calf-studio-gear/calf/commits?author=falktx)
+Here comes a list of projects I have contributed to, linking directly to either the list of commits from me or a pull-request if everything is contained within it. I am not a maintainer for any of these projects.
 
-Collection of audio plugins.
+##### [Calf Studio Gear](https://github.com/calf-studio-gear/calf/commits?author=falktx)
 
-I implemented LV2 UI show interface, so the plugins could be used in plugins hosts that do not support UIs of type Gtk2.
+Implemented LV2 UI show interface, so the plugins could be used in plugins hosts that do not support UIs of type Gtk2.
 
-#### [Dragonfly Reverb](https://github.com/michaelwillis/dragonfly-reverb/commits?author=falkTX)
+##### [Dragonfly Reverb](https://github.com/michaelwillis/dragonfly-reverb/commits?author=falkTX)
 
-A set of reverb plugins, based on my DISTRHO Plugin Framework.
+Help in maintenance, specially in regards to compatibility with DPF changes.
 
-I help in maintenance, specially in regards to compatibility with DPF changes.
+##### [drmr](https://github.com/nicklan/drmr/pull/12)
 
-- lsp CI setup
-- sassy linux build https://github.com/falkTX/sassy
-- wolf-shaper high-dpi port
-- zamaudio
-- zynaddsubfx plugin support (started in carla, remade in DPF)
+Many fixes for better LV2 handling, crashes and event timing.
 
-https://github.com/falkTX/drmr
+Project seems abandoned now, and a new one appeared as continuation of it - https://github.com/psemiletov/drumrox.
 
+##### [Sassy Audio Spreadsheet](https://github.com/jarikomppa/sassy/pull/1)
+
+Tweaks to code and build system for cross-platform support.
+
+Sadly still crashes under 64bit systems, but we can at least build it now.
+
+##### [Wolf Shaper](https://github.com/wolf-plugins/wolf-shaper/commits?author=falkTX)
+
+Build system and plugin meta-data fixes, implemented high-dpi support.
+
+##### [zam-plugins](https://github.com/zamaudio/zam-plugins/commits?author=falkTX)
+
+Project setup for usage with DPF, general fixes.
+
+##### [ZynAddSubFX](https://github.com/zynaddsubfx/zynaddsubfx/commits?author=falkTX)
+
+Fixes to codebase to work as an audio plugin and implement plugin support through DPF.
+
+<!-- TODO: add the rest of them, including...
 freaked
-
 https://github.com/ninodewit/SHIRO-Plugins
-
 https://github.com/falkTX/jack_interposer
-
 https://github.com/falkTX/invada-studio-plugins-lv2
-
 https://github.com/falkTX/protrekkr
-
-PS: list a bunch of pull requests for patches/fixes/etc
+-->
 
 ## Other work
 
-CI/CD github actions
+Because there are other interesting things to show that do not really fit in other categories.
 
-https://github.com/moddevices/mod-lv2-extensions
-https://github.com/KXStudio/LV2-Extensions
+##### [KXStudio repositories for Debian-based systems](https://kx.studio/Repositories)
 
-https://github.com/moddevices/linux-mainline/commits/linux-6.1.y-patches
+I have been packaging [audio applications](https://kx.studio/Repositories:Applications) and [plugins](https://kx.studio/Repositories:Plugins) compatible with Debian-based systems for a long while, via the KXStudio project. As a way to make these packages as generic as possible (as in, to work on as many systems as possible with minimal dependencies) I also build pretty much all needed dependencies/libraries statically.
 
-- Embed Linux buildroot
-- Linux Live CD/USB ISO setups
-- jack2 maintenance
-- KXStudio repo packaging
+##### [CMake](https://github.com/DISTRHO/dpf-cmake-action) and [Makefile setup for GitHub CI actions](https://github.com/DISTRHO/dpf-makefile-action)
 
-https://github.com/falkTX/nooice
+Complex GitHub CI actions specialized for building DPF-based audio plugins that use CMake or Makefile as their build system.
 
-https://github.com/DISTRHO/PawPaw
+Serves as a demonstration for other CI actions I have setup in other projects, which look alike these ones.
 
-https://github.com/wineasio/wineasio/
+##### [MOD Audio](https://github.com/moddevices/mod-lv2-extensions) and [KXStudio custom LV2 extensions](https://github.com/KXStudio/LV2-Extensions)
 
-### WIP
+Custom LV2 extensions for MOD Audio and KXStudio, extending both meta-data and C APIs. Includes the ttl definitions, making it suitable for parser and plugin validation tools.
 
-#### [OneKnob-Series](https://github.com/DISTRHO/OneKnob-Series)
+##### [jack2](https://jackaudio.org/)
 
-# TODO finalize text
+I have been maintaining the JACK2 project since 2017, bringing back macOS and Windows releases and making sure it can still run on top of modern systems.
 
-The OneKnob-Series is planned to be a collection of stupidly simple but well-polished and visually pleasing audio plugins, with as little controls as possible, often just one knob and a few options.
+##### [Linux kernel patching](https://github.com/moddevices/linux-mainline/commits/linux-6.1.y-patches)
 
-It is still in development and research phase, I started it as a way to use/test/develop oui-blendish widgets within DPF.
+As part of my work for MOD Audio, I have patched the Linux kernel build. Includes importing fixes from vendor specific kernel, doing some fixes of my own and where everything else fails add some "temporary" hacks to get things working.
 
-![OneKnob-Series](https://github.com/DISTRHO/OneKnob-Series/blob/main/plugins/BrickwallLimiter/Screenshot.png)
+##### [PawPaw](https://github.com/DISTRHO/PawPaw)
 
-https://github.com/falkTX/Chibi
-https://github.com/falkTX/kuriborosu
+A collection of bash scripts for building a set of open-source libraries statically, for Linux, macOS, Windows and Web-assembly. Involves quite some patching as some libraries were not intended to be used statically, but we want static builds for audio plugins that typically need to be self-contained.
 
-https://github.com/falkTX/FFmpeg/commits/n4.4-jackoutdev
+Also builds a set of LV2 plugins for macOS and Windows, packaged in an easy and convenient installer package.
 
-OBS audio plugin w/ carla
+Created out of the need to have the same set of libraries for many projects, which is tedious to maintain in several projects separately. Ended up being used for many of my projects, like Cardinal and Carla, and also JACK2 official builds.
