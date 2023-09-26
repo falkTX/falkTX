@@ -344,7 +344,7 @@ Help in maintenance, specially in regards to compatibility with DPF changes.
 
 ##### [drmr](https://github.com/nicklan/drmr/pull/12)
 
-Many fixes for better LV2 handling, crashes and event timing. Project seems abandoned now, and a new one appeared as continuation of it - https://github.com/psemiletov/drumrox.
+Many fixes for better LV2 handling, crashes and event timing. Project seems abandoned now, and a new one appeared as continuation of it - [github.com/psemiletov/drumrox](https://github.com/psemiletov/drumrox).
 
 ##### [Sassy Audio Spreadsheet](https://github.com/jarikomppa/sassy/pull/1)
 
