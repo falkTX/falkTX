@@ -17,14 +17,14 @@ If you are just browsing through and like what you see here, please know I have 
 [DISTRHO Plugin Framework](https://github.com/DISTRHO/DPF), or DPF for short, is a **minimalistic C++ framework for audio plugins**.  
 I started it many years ago after being disappointed with the available options for making desktop audio plugins.
 Pretty much all the existing options did not support Linux (most still don't) or did so in a subpar way.
-Those that did, like [JUCE](https://juce.com/), ended up generating 2Mb+ sized binaries for a very simple filter effect...
 
-The idea behind DPF was (and still is) to have something that is stupid simple and works well, intentionally not supporting more esoteric features.
-This applies to graphics as well, for which DPF does not implement its own draw operations but instead uses Cairo, OpenGL or Vulkan through a [pugl](https://github.com/lv2/pugl) backend.
+The idea behind DPF was (and still is) to have something that is stupid simple and works well, intentionally not supporting more esoteric features. This applies to graphics as well, for which DPF does not implement its own draw operations but instead uses Cairo, OpenGL or Vulkan through a [pugl](https://github.com/lv2/pugl) backend.
 
 By having OpenGL as a possible graphics drawing API, many existing "mini toolkits" can be easily ported over to work with DPF.  
 I added NanoVG as one of such "mini toolkits", directly integrated in the DPF project.  
 Also added others like [oui-blendish](https://github.com/IceDragon200/oui-blendish) and [Dear ImGui](https://github.com/ocornut/imgui) to the separate [DPF-Widgets](https://github.com/DISTRHO/DPF-Widgets) project.
+
+So far I have implemented LADSPA, DSSI, LV2, VST2, VST3 and CLAP plugin formats, with an extra standalone type that can use JACK if available otherwise falls back to the default audio driver in the system (via RtAudio and SDL).
 
 ### DPF Plugins
 
