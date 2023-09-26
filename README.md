@@ -45,7 +45,7 @@ It loads previously-trained AI models meant to simulate guitar amplifiers.
 It started as an [LV2 plugin from AidaDSP](https://github.com/AidaDSP/aidadsp-lv2), I ported it to DPF so that we could have it running as CLAP/VST2/VST3 + Standalone, with the GUI based on their existing designs (all drawing manually recreated in NanoVG).  
 I also added some peak meters and post-amp IR convolution (based on work done for other projects).
 
-An wasm/browser version is available to try online at [aida.kx.studio](https://aida.kx.studio/).
+A wasm/browser version is available to try online at [aida.kx.studio](https://aida.kx.studio/).
 
 ![AIDA-X](https://raw.githubusercontent.com/AidaDSP/AIDA-X/main/docs/Screenshot.png)
 
@@ -58,7 +58,7 @@ Also as a way to have a Rack version with support for more than just the basic 3
 
 I created a few custom modules and also ported [AIDA-X](#aida-x), [Carla](#carla), [glBars](#glbars), [Ildaeil](#ildaeil) and [PitchTrackingSeries](#pitchtrackingseries) to it.
 
-An wasm/browser version is available to try online at [cardinal.kx.studio/live](https://cardinal.kx.studio/live).
+A wasm/browser version is available to try online at [cardinal.kx.studio/live](https://cardinal.kx.studio/live).
 
 ![Cardinal](https://raw.githubusercontent.com/DISTRHO/Cardinal/main/docs/Screenshot_Basic-Patching.png)
 
@@ -235,7 +235,7 @@ Created out of curiosity, to see if such setup would even work. Turns out it is 
 
 #### [Carla](https://github.com/falkTX/Carla)
 
-An modular, feature-full audio plugin host, so we can load all the audio plugins mentioned above on this page.
+A modular, feature-full audio plugin host, so we can load all the audio plugins mentioned above on this page.
 Has a split backend vs frontend design, which allows the backend to be used in other projects (such as Cardinal, Ildaeil, LMMS and Zrythm).
 
 Backend is written in C and C++, frontend has some C++ but still mostly in Python + Qt.  
