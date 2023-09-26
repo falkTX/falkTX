@@ -297,21 +297,25 @@ Written in Python and Qt.
 
 ## Full-stack
 
-mod cloud builder
+#### [MOD Cloud Builder](https://github.com/moddevices/mod-cloud-builder)
 
-mod-ui
+A [docker-compose](https://docs.docker.com/compose/) setup for hosting an audio plugin building service targeting [MOD devices](https://mod.audio/), including pushing plugin builds into MOD units connected to the local network.
 
-## Web development
+The official instance runs at [builder.mod.audio](http://builder.mod.audio/) and is intentionally kept as HTTP only, due to it needing to send requests into the local network (for connecting to MOD units over websockets).
 
-- mod-ui maintenance and new development
-- kxstudio site, no JS in use
-- falktx and this site
+A central, public-facing webserver actively listens for requests using [socket.io](https://socket.io/) and dispatches the actual build process to another (purely server-side) docker instance. The output of the build process is sent back to the main webserver, for keeping the page active (users might assume nothing is happening otherwise) and also as way to debug build failures.
 
-client-side web-assembly: Cardinal, Ildaeil
+#### [MOD Host](https://github.com/moddevices/mod-host) + [MOD UI](https://github.com/moddevices/mod-ui)
 
-server-side with webrtc streaming: modbox
+Not projects I created, but have been developing and maintaining since 2016, including the addition of completely new features and porting to work on other operating systems.
 
-https://github.com/falkTX/danoft ??
+The host is written in C, works with JACK and loads LV2 audio plugins. A TCP socket is used to communicate with mod-ui, the webserver written in python using tornado. This webserver also serves as frontend via HTML/JS/CSS tech.
+
+An online version of the webserver can be played with at [modbox.kx.studio](https://modbox.kx.studio/), intentionally has no audio as this is meant to show case the frontend side of it. Use [try.mod.audio](https://try.mod.audio/) for a version that does audio, running server-side and transmitted using WebRTC. (click "Enable streaming" on the top to start audio stream)
+
+The mod-ui project is meant to be used on desktop systems, as part of my work for MOD Audio UG we never did a variant for mobile/touch devices.
+
+#### Self hosting
 
 Except for email and proprietary platforms, pretty much all my all social / online service usage is self-hosted.  
 This includes stuff like data backups, video streaming (as creator/uploader) and website hosting.
@@ -319,20 +323,29 @@ This includes stuff like data backups, video streaming (as creator/uploader) and
 I like Debian and Apache for hosting serving web content, and know those fairly well at this point.  
 When setting up self-hosted services I typically go with a systemd service (if the service is simple and self-contained), or rely on docker and/or docker-compose to keep them contained.
 
-Here are a few things I have hosted:
+Here are a few interesting things I am hosting, that are not just static websites:
 
-- [kx.studio](https://kx.studio/) - Good old static website hosting
-- [Gitea](https://peertube.kx.studio/) - Nice and fast, can be compiled into a single binary (golang based)
-- [Mastodon](https://mastodon.falktx.com/) - Complex with many services (come follow me!)
-- [MOD Box](https://modbox.kx.studio/) - Custom setup, experimental, using server-side audio rendering streamed using WebRTC
-- [NextCloud](https://nextcloud.falktx.com/apps/gallery/s/HNidExQiALAAyoe) - Easy to manage and update (enjoy the photos!)
-- [PeerTube](https://peertube.kx.studio/) - Complex and only officially supports nginx, but it works
-- [RocketChat](https://chat.kx.studio/) - Complex and fragile, will likely remove it soon
+- [cardinal.kx.studio/live](https://cardinal.kx.studio/live) - Web-assembly build of Cardinal, using brotli-compressed assets and wasm-simd when supported on client side
+- [Gitea](https://git.kx.studio/) - Nice and fast git hosting, can be compiled into a single monolithic binary (golang based)
+- [Jitsi](https://meet.kx.studio/) - For quick and easy calls with friends (specially handy now that the Jitsi main instance requires a user account)
+- [Mastodon](https://mastodon.falktx.com/) - ActivityPub based social media platform, complex setup with many services (come follow me!)
+- [NextCloud](https://nextcloud.falktx.com/apps/gallery/s/HNidExQiALAAyoe) - PHP based, easy to manage and update (enjoy the photos!)
+- [PeerTube](https://peertube.kx.studio/) - Video hosting and streaming, complex setup that officially supports nginx, but I got it to work with Apache anyway :)
 
 ## Open-Source contributions
 
-- calf
-- dragonflyreverb many PRs
+#### [Calf Studio Gear](https://github.com/calf-studio-gear/calf/commits?author=falktx)
+
+Collection of audio plugins.
+
+I implemented LV2 UI show interface, so the plugins could be used in plugins hosts that do not support UIs of type Gtk2.
+
+#### [Dragonfly Reverb](https://github.com/michaelwillis/dragonfly-reverb/commits?author=falkTX)
+
+A set of reverb plugins, based on my DISTRHO Plugin Framework.
+
+I help in maintenance, specially in regards to compatibility with DPF changes.
+
 - lsp CI setup
 - sassy linux build https://github.com/falkTX/sassy
 - wolf-shaper high-dpi port
@@ -340,6 +353,8 @@ Here are a few things I have hosted:
 - zynaddsubfx plugin support (started in carla, remade in DPF)
 
 https://github.com/falkTX/drmr
+
+freaked
 
 https://github.com/ninodewit/SHIRO-Plugins
 
@@ -357,10 +372,6 @@ CI/CD github actions
 
 https://github.com/moddevices/mod-lv2-extensions
 https://github.com/KXStudio/LV2-Extensions
-
-https://github.com/moddevices/mod-host
-
-https://github.com/moddevices/mod-ui
 
 https://github.com/moddevices/linux-mainline/commits/linux-6.1.y-patches
 
