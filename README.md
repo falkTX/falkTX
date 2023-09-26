@@ -344,15 +344,11 @@ Help in maintenance, specially in regards to compatibility with DPF changes.
 
 ##### [drmr](https://github.com/nicklan/drmr/pull/12)
 
-Many fixes for better LV2 handling, crashes and event timing.
-
-Project seems abandoned now, and a new one appeared as continuation of it - https://github.com/psemiletov/drumrox.
+Many fixes for better LV2 handling, crashes and event timing. Project seems abandoned now, and a new one appeared as continuation of it - https://github.com/psemiletov/drumrox.
 
 ##### [Sassy Audio Spreadsheet](https://github.com/jarikomppa/sassy/pull/1)
 
-Tweaks to code and build system for cross-platform support.
-
-Sadly still crashes under 64bit systems, but we can at least build it now.
+Tweaks to code and build system for cross-platform support. Sadly still crashes under 64bit systems, but we can at least build it now.
 
 ##### [Wolf Shaper](https://github.com/wolf-plugins/wolf-shaper/commits?author=falkTX)
 
