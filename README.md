@@ -168,7 +168,7 @@ I started the project as a way to have more complex OpenGL setups working with D
 Small utility plugins for getting sound out of plugin hosts into [JACK](https://jackaudio.org/).  
 These plugins do not have any GUI or configuration whatsoever.
 
-I created these plugins as a way to more reliably test my work-in-progress [OBS audio plugin support](#obs-audio-plugin-host), as (at the time I started the project) OBS did/does not have a way to monitor the audio output without starting a live stream.
+I created these plugins as a way to more reliably test my work-in-progress [OBS audio plugin support](#obs-audio-plugin-support), as (at the time I started the project) OBS did/does not have a way to monitor the audio output without starting a live stream.
 
 It includes a "soft" zinc variant, that buffers audio and thus has latency, but works with hosts that dynamically change the amount of samples on each plugin process run.  
 A "hard" zinc variant directly syncs the plugin host audio thread with the plugin-created JACK client, thus having no extra latency.
@@ -384,9 +384,9 @@ Complex GitHub CI actions specialized for building DPF-based audio plugins that 
 
 Serves as a demonstration for other CI actions I have setup in other projects, which look alike these ones.
 
-##### [MOD Audio](https://github.com/moddevices/mod-lv2-extensions) and [KXStudio custom LV2 extensions](https://github.com/KXStudio/LV2-Extensions)
+##### [FFmpeg JACK output support](https://github.com/falkTX/FFmpeg/commits/n4.4-jackoutdev)
 
-Custom LV2 extensions for MOD Audio and KXStudio, extending both meta-data and C APIs. Includes the ttl definitions, making it suitable for parser and plugin validation tools.
+Implementation of JACK as an FFmpeg output device, which I ended up not using in the end. Might still be useful as a base for someone else to (continue to) work on.
 
 ##### [jack2](https://jackaudio.org/)
 
@@ -395,6 +395,14 @@ I have been maintaining the JACK2 project since 2017, bringing back macOS and Wi
 ##### [Linux kernel patching](https://github.com/moddevices/linux-mainline/commits/linux-6.1.y-patches)
 
 As part of my work for MOD Audio, I have patched the Linux kernel build. Includes importing fixes from vendor specific kernel, doing some fixes of my own and where everything else fails add some "temporary" hacks to get things working.
+
+##### [MOD Audio](https://github.com/moddevices/mod-lv2-extensions) and [KXStudio custom LV2 extensions](https://github.com/KXStudio/LV2-Extensions)
+
+Custom LV2 extensions for MOD Audio and KXStudio, extending both meta-data and C APIs. Includes the ttl definitions, making it suitable for parser and plugin validation tools.
+
+##### [OBS audio plugin support](https://github.com/obsproject/obs-studio/pull/8919)
+
+Work-in-progress pull request for OBS, integrating parts of [Carla Plugin Host](#carla) directly in it. This allows to load LADSPA, LV2, VST2, VST3, CLAP and JSFX all in a nice single package, not to mention running in a separate process so plugins cannot crash OBS.
 
 ##### [PawPaw](https://github.com/DISTRHO/PawPaw)
 
