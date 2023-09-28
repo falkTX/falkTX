@@ -1,6 +1,6 @@
-# falkTX Portfolio
+# Hi there 👋 Welcome to my profile page! 🤓
 
-This is a list of projects I have worked on, either for a job or for fun and research, sometimes as a challenge too.
+Here is a list of projects I have worked on, either for a job or for fun and research, sometimes as a challenge too.
 
 If you are interested on hiring me for something similar to what you see here, please get in touch!  
 You can reach me at [falktx@falktx.com](mailto:falktx@falktx.com), expect negotiable rates around 60eur/h, half of that if doing it as an open-source project.
@@ -10,9 +10,7 @@ If you are just browsing through and like what you see here, please know I have 
 
 ## Audio plugins
 
-### DISTRHO Plugin Framework
-
-[https://github.com/DISTRHO/DPF](https://github.com/DISTRHO/DPF)
+### [DISTRHO Plugin Framework](https://github.com/DISTRHO/DPF)
 
 [DISTRHO Plugin Framework](https://github.com/DISTRHO/DPF), or DPF for short, is a **minimalistic C++ framework for audio plugins**.  
 I started it many years ago after being disappointed with the available options for making desktop audio plugins.
