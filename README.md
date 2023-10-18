@@ -2,6 +2,8 @@
 
 Here is a list of projects I have worked on, either for a job or for fun and research, sometimes as a challenge too.
 
+A possibly updated version of this content is also available online at [falktx.berlin](https://falktx.berlin/).
+
 If you are interested on hiring me for something similar to what you see here, please get in touch!  
 You can reach me at [falktx@falktx.com](mailto:falktx@falktx.com), expect negotiable rates around 60eur/h, half of that if doing it as an open-source project.
 Other details about my work can be found [in my CV](https://falktx.com/files/cv.pdf).
@@ -46,6 +48,7 @@ I also added some peak meters and post-amp IR convolution (based on work done fo
 A wasm/browser version is available to try online at [aida.kx.studio](https://aida.kx.studio/).
 
 ![AIDA-X](https://raw.githubusercontent.com/AidaDSP/AIDA-X/main/docs/Screenshot.png)
+\
 
 #### [Cardinal](https://github.com/DISTRHO/Cardinal)
 
@@ -59,6 +62,7 @@ I created a few custom modules and also ported [AIDA-X](#aida-x), [Carla](#carla
 A wasm/browser version is available to try online at [cardinal.kx.studio/live](https://cardinal.kx.studio/live).
 
 ![Cardinal](https://raw.githubusercontent.com/DISTRHO/Cardinal/main/docs/Screenshot_Basic-Patching.png)
+\
 
 #### [Fadeli](https://github.com/DISTRHO/Fadeli)
 
@@ -77,6 +81,7 @@ Adapted from the [jack_glbars](https://github.com/nedko/jack_glbars) project by 
 I created this project as a way to test raw OpenGL calls for a plugin GUI, something that is not static but reacts to audio.
 
 ![glBars](https://raw.githubusercontent.com/DISTRHO/glBars/master/plugins/glBars/Screenshot.png)
+\
 
 #### [Ildaeil](https://github.com/DISTRHO/Ildaeil)
 
@@ -89,6 +94,7 @@ Ildaeil is mostly "glue code" to combine all aspects of [Carla](#carla) and [DPF
 Most of the complexity in Ildaeil comes from embedding hosted plugin GUIs while still displaying Ildaeil's own OpenGL-based GUI.
 
 ![Ildaeil](https://kx.studio/repo/screenshots/ildaeil.png)
+\
 
 #### [Max-Gen examples](https://github.com/DISTRHO/DPF-Max-Gen) (MaBitcrush, MaFreeverb, MaGigaverb, MaPitchshift)
 
@@ -107,8 +113,10 @@ The project was started by [Klaus Scheuermann](https://4ohm.de/) and a few other
 My work consisted of setting up the build infrastructure, plugin format handling (via DPF of course) and coding a custom GUI for it. Still help on its maintenance from time to time.
 
 ![master_me easy view](https://raw.githubusercontent.com/trummerschlunk/master_me/master/img/screenshot-easy.png)
+\
 
 ![master_me expert view](https://raw.githubusercontent.com/trummerschlunk/master_me/master/img/screenshot-expert.png)
+\
 
 #### [Mini-Series](https://github.com/DISTRHO/Mini-Series) (3BandEQ, 3BandSplitter, PingPongPan)
 
@@ -125,8 +133,10 @@ This collection currently includes:
 Might add more plugins to it later on, but for now they have served its purpose.
 
 ![3BandEQ](https://raw.githubusercontent.com/DISTRHO/mini-series/master/plugins/3BandEQ/Screenshot.png)
+\
 
 ![PingPongPan](https://raw.githubusercontent.com/DISTRHO/mini-series/master/plugins/PingPongPan/Screenshot.png)
+\
 
 #### [MVerb](https://github.com/DISTRHO/MVerb)
 
@@ -134,6 +144,7 @@ An open-source reverb, [originally created as VST2](https://github.com/martineas
 It also serves as a way to test text rendering.
 
 ![MVerb](https://raw.githubusercontent.com/DISTRHO/MVerb/master/plugins/MVerb/Screenshot.png)
+\
 
 #### [Nekobi](https://github.com/DISTRHO/Nekobi)
 
@@ -144,6 +155,7 @@ I ported it to DPF as a way to get a small synth example.
 Graphics done by [António Saraiva](http://www.facebook.com/melmaquiano).
 
 ![Nekobi](https://raw.githubusercontent.com/DISTRHO/nekobi/master/plugins/Nekobi/Screenshot.png)
+\
 
 #### [PitchTrackingSeries](https://github.com/DISTRHO/PitchTrackingSeries)
 
@@ -160,6 +172,7 @@ This is an audio plugin that makes use of the the [projectM awesome music visual
 I started the project as a way to have more complex OpenGL setups working with DPF, but also because it's cool.
 
 ![ProM](https://raw.githubusercontent.com/DISTRHO/prom/master/plugins/ProM/Screenshot.png)
+\
 
 #### [Zinc](https://github.com/DISTRHO/Zinc)
 
@@ -251,6 +264,7 @@ Extra file support includes SF2/3 using fluidsynth, SFZ using an internal SFZero
 Still experimental, under Linux Carla can load JACK standalone applications within itself by faking a JACK server. This uses a similar setup as plugin bridges do, but with some extra LD_PRELOAD "magic" to force applications to see a custom libjack.so from Carla instead of the real one. Applications end up talking to Carla but have no knowledge of such. Only parts of the JACK API are implemented in this mode, but enough to already get most applications to work.
 
 ![Carla](https://kx.studio/repo/screenshots/carla-git.png)
+\
 
 #### [Cadence and tools](https://github.com/falkTX/Cadence)
 
@@ -270,6 +284,7 @@ Over time Cadence small parts have moved into other projects:
 The only big remaining part to still be split off is the jack2/jackdbus settings tool and then Cadence can really die as a project.
 
 ![Cadence](https://kx.studio/repo/screenshots/cadence.png)
+\
 
 #### [MOD Live-USB Welcome/Setup](https://github.com/moddevices/mod-live-usb)
 
@@ -284,6 +299,7 @@ For the usecase I wrote this for the external application was actually a local w
 It is likely that this live USB setup can be adapted for other applications, perhaps not even audio related.
 
 ![MOD Live-USB](https://raw.githubusercontent.com/moddevices/mod-live-usb/main/Screenshot.png)
+\
 
 #### [MOD Panel](https://github.com/moddevices/mod-panel)
 
@@ -292,6 +308,7 @@ A simple control panel to start a few services in a sequential manner (mod-host 
 Written in Python and Qt.
 
 ![MOD Panel](https://raw.githubusercontent.com/moddevices/mod-panel/master/screenshot.png)
+\
 
 ## Full-stack
 
