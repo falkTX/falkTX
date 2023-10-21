@@ -361,6 +361,10 @@ Help in maintenance, specially in regards to compatibility with DPF changes.
 
 Many fixes for better LV2 handling, crashes and event timing. Project seems abandoned now, and a new one appeared as continuation of it - [github.com/psemiletov/drumrox](https://github.com/psemiletov/drumrox).
 
+##### [pugl](https://github.com/lv2/pugl/commits?author=falkTX)
+
+Help in bug-fixing and testing, with the occasional feature request/proposal. DPF relies on this mini library/toolkit for all event handling, so makes sense to keep good relations with upstream.
+
 ##### [Sassy Audio Spreadsheet](https://github.com/jarikomppa/sassy/pull/1)
 
 Tweaks to code and build system for cross-platform support. Sadly still crashes under 64bit systems, but we can at least build it now.
